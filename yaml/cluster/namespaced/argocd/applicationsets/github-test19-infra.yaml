@@ -24,6 +24,7 @@ spec:
             recurse: true
       destination:
         server: https://kubernetes.default.svc
+        namespace: test19
       syncPolicy:
         automated:
           prune: false
