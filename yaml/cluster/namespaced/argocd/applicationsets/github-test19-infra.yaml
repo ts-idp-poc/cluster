@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: github-test19-infra
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: git@github.com:ts-idp-poc/test19-infra.git
+        revision: main
+        directories:
+            - path: yaml
+        interval: 1m
+  template:
+    metadata:
+      name: 'test19-infra'
+    spec:
+      project: test19
+      source:
+        repoURL: git@github.com:ts-idp-poc/test19-infra.git
+        targetRevision: main
+        path: yaml
+        directory:
+            recurse: true
+      destination:
+        server: https://kubernetes.default.svc
+      syncPolicy:
+        automated:
+          prune: false
+          selfHeal: true
