@@ -17,7 +17,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: git@github.com:ts-idp-poc/test17-app.git
+        repoURL: git@github.com:ts-idp-poc/test17-infra.git
         targetRevision: main
         path: yaml
         directory:
