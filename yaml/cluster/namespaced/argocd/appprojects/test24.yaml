@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+    name: test24
+    namespace: argocd
+spec:
+    description: test24 app project
+    destinations:
+    - server: https://kubernetes.default.svc
+      namespace: "test24"
+    sourceRepos:
+    - git@github.com:ts-idp-poc/test24-app.git
+    - git@github.com:ts-idp-poc/test24-infra.git
+    clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+    namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+    sourceNamespaces:
+    - test24
