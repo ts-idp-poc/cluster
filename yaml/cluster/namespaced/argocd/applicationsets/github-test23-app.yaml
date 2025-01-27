@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: github-test23-app
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: git@github.com:ts-idp-poc/test23-app.git
+        revision: main
+        directories:
+            - path: yaml
+        interval: 1m
+  template:
+    metadata:
+      name: 'test23-app'
+    spec:
+      project: test23
+      source:
+        repoURL: git@github.com:ts-idp-poc/test23-app.git
+        targetRevision: main
+        path: yaml
+        directory:
+            recurse: true
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: "test23"
+      syncPolicy:
+        automated:
+          prune: false
+          selfHeal: true
