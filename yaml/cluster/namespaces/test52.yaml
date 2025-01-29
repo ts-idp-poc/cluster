@@ -1,0 +1,11 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: "test52"
+  labels:
+    name: "test52"
+    tremolo.io/request-access: enabled
+
+  annotations:
+    tremolo.io/managedByGit: "true"
+    tremolo.io/giturl: git@github.com:ts-idp-poc/test52-infra.git
