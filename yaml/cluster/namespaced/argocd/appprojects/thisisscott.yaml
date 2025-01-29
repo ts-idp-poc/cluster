@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+    name: thisisscott
+    namespace: argocd
+spec:
+    description: thisisscott app project
+    destinations:
+    - server: https://kubernetes.default.svc
+      namespace: "thisisscott"
+    sourceRepos:
+    - git@github.com:ts-idp-poc/thisisscott-app.git
+    - git@github.com:ts-idp-poc/thisisscott-infra.git
+    clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+    namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+    sourceNamespaces:
+    - thisisscott

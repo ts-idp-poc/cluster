@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: github-thisisscott-app
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: git@github.com:ts-idp-poc/thisisscott-app.git
+        revision: main
+        directories:
+            - path: yaml
+        interval: 1m
+  template:
+    metadata:
+      name: 'thisisscott-app'
+    spec:
+      project: thisisscott
+      source:
+        repoURL: git@github.com:ts-idp-poc/thisisscott-app.git
+        targetRevision: main
+        path: yaml
+        directory:
+            recurse: true
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: "thisisscott"
+      syncPolicy:
+        automated:
+          prune: false
+          selfHeal: true
