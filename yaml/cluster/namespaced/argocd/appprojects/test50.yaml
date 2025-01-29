@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+    name: test50
+    namespace: argocd
+spec:
+    description: test50 app project
+    destinations:
+    - server: https://kubernetes.default.svc
+      namespace: "test50"
+    sourceRepos:
+    - git@github.com:ts-idp-poc/test50-app.git
+    - git@github.com:ts-idp-poc/test50-infra.git
+    clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+    namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+    sourceNamespaces:
+    - test50
